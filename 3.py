@@ -3,6 +3,9 @@ import random
 import math
 import time
 
+##흰배경
+##점수 x
+##-자 이슈있음
 
 #initialize pygame
 pygame.init()

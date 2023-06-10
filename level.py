@@ -1,6 +1,5 @@
 import pygame
 from settings import *
-from random import choice, randint
 
 class Level:
     def __init__(self, render):

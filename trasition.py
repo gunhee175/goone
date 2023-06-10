@@ -1,5 +1,5 @@
 import pygame
-import sys
+import sys, os
 
 # Initialize Pygame
 pygame.init()
@@ -26,10 +26,21 @@ GAMEOVER_SCREEN = 3
 
 current_screen = TITLE_SCREEN
 
+
+# for packing game
+def resource_path(relative):
+	if hasattr(sys, "_MEIPASS"):
+		absolute_path = os.path.join(sys._MEIPASS, relative)
+	else:
+		absolute_path = os.path.join(relative)
+	return absolute_path
+
+
 def title_screen():
     # Display the title screen
     screen.fill(BLACK)
-    title_font = pygame.font.SysFont("Arial", 60)
+    # title_font = pygame.font.SysFont("joystixmonospaceregular", 60)
+    title_font = pygame.font.Font(resource_path('fonts/joystix.ttf'), 60)
     title_text = title_font.render("Game Title", True, WHITE)
     screen.blit(title_text, (SCREEN_WIDTH // 2 - title_text.get_width() // 2, 200))
     pygame.display.flip()
@@ -37,7 +48,7 @@ def title_screen():
 def menu_screen():
     # Display the menu screen
     screen.fill(BLACK)
-    menu_font = pygame.font.SysFont("Arial", 30)
+    menu_font = pygame.font.SysFont("joystixmonospaceregular", 30)
     menu_text = menu_font.render("Press SPACE to Start", True, WHITE)
     screen.blit(menu_text, (SCREEN_WIDTH // 2 - menu_text.get_width() // 2, 300))
     pygame.display.flip()
@@ -45,7 +56,7 @@ def menu_screen():
 def in_game_screen():
     # Display the in-game screen
     screen.fill(BLACK)
-    in_game_font = pygame.font.SysFont("Arial", 30)
+    in_game_font = pygame.font.SysFont("joystixmonospaceregular", 30)
     in_game_text = in_game_font.render("In-Game Screen", True, GREEN)
     screen.blit(in_game_text, (SCREEN_WIDTH // 2 - in_game_text.get_width() // 2, 300))
     pygame.display.flip()
@@ -53,7 +64,7 @@ def in_game_screen():
 def gameover_screen():
     # Display the game over screen
     screen.fill(BLACK)
-    gameover_font = pygame.font.SysFont("Arial", 30)
+    gameover_font = pygame.font.SysFont("joystixmonospaceregular", 30)
     gameover_text = gameover_font.render("Game Over", True, RED)
     screen.blit(gameover_text, (SCREEN_WIDTH // 2 - gameover_text.get_width() // 2, 300))
     pygame.display.flip()
