@@ -18,6 +18,12 @@ VIRTUAL_RES = (800, 600) # CRT shader resolution
 REAL_RES = (WIDTH, HEIGHT) # real resolution
 FPS = 60 
 
+# set up the colours
+white = (255, 255, 255)
+black = (0, 0, 0)
+red = (255, 0, 0)
+blue = (0, 0, 255)
+orange = (255, 165, 0)
 
 
 screen = pygame.Surface((800,600)).convert((255, 65280, 16711680, 0))

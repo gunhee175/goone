@@ -2,6 +2,8 @@ import pygame
 import random
 import math
 import time
+import sys, os # 건: 폰트 추가하면서 들어감
+
 
 
 #initialize pygame
@@ -40,6 +42,7 @@ paddle_width = 100
 paddle_height = 10
 paddle_x = window_width // 2 - paddle_width // 2
 paddle_y = window_height - paddle_height - 10
+
 paddle = pygame.Rect(paddle_x, paddle_y, paddle_width, paddle_height)
 paddle_movement = 8
 
@@ -80,12 +83,15 @@ for row in range(bricks_rows):
 clock = pygame.time.Clock()
 
 # function to handle ball and paddle collsion
+# 번역: 공과 패들의 충돌을 처리하는 함수
 def handle_collision():
     global ball_dy
     # reverse the vertical vector of ball
+    # 번역: 공의 수직 벡터를 반전시킨다.
     ball_dy = ball_dy * -1
 
 # function to handle ball movement and speed to give variation to game
+# 번역: 공의 움직임과 속도를 처리하는 함수
 def handle_ball():
     global ball_dx, ball_dy, ball_speed
     # increase ball speed linearly
@@ -118,9 +124,30 @@ def handle_ball():
     if ball.top > window_height + ball_radius:
         game_over = True
 
-# Set up fonts
-font =pygame.font.Font(None, 36)
-small_font =pygame.font.Font(None, 24)
+## 게임 패키징을 위한 함수
+## 건: 폰트 추가하면서 들어감2
+## 경로를 지정해주는 함수
+## sys._MEIPASS는 pyinstaller로 패키징할 때 임시로 만들어지는 경로
+## relative는 상대경로
+## absolute_path는 절대경로
+## sys._MEIPASS가 있으면 절대경로를 리턴하고 없으면 상대경로를 리턴한다.
+## 이 함수를 사용하면 패키징할 때와 그냥 실행할 때를 구분해서 경로를 지정할 필요가 없다.
+## 예를 들어, resource_path('fonts/joystix.ttf')를 하면
+## 패키징할 때는 C:\Users\user\AppData\Local\Temp\_MEIxxxxxx\fonts\joystix.ttf
+## 그냥 실행할 때는 fonts\joystix.ttf
+## 이렇게 리턴된다.
+def resource_path(relative):
+	if hasattr(sys, "_MEIPASS"):
+		absolute_path = os.path.join(sys._MEIPASS, relative)
+	else:
+		absolute_path = os.path.join(relative)
+	return absolute_path
+
+
+
+# Set up fonts # 건: 폰트 추가하면서 들어감1
+font =pygame.font.Font(resource_path('fonts/joystix.ttf'), 36)
+small_font =pygame.font.Font(resource_path('fonts/joystix.ttf'), 24)
 
 
 # set up the start message
