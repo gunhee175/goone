@@ -37,7 +37,10 @@ paddle = pygame.Rect(paddle_x, paddle_y, paddle_width, paddle_height)
 
 #공 변수 설정
 #ball_angle 에서 exept 0(rad) 추가
-if random.uniform(-math.pi / 4, math.pi / 4) == 0:
+if not random.uniform(-math.pi / 4, math.pi / 4) == 0:
+    ball_angle = random.uniform(-math.pi / 4, math.pi / 4)
+else:
+    # 다시 if문으로 돌아가서 다시 random.uniform(-math.pi / 4, math.pi / 4)를 실행
     ball_angle = random.uniform(-math.pi / 4, math.pi / 4)
 ball_radius = 10
 ball_x = window_width // 2

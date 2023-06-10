@@ -2,6 +2,8 @@ import pygame
 import random
 import math
 
+# 종혁이가 금요일 저녁에 보낸 코드
+
 # Initialize Pygame
 pygame.init()
 
@@ -28,11 +30,14 @@ paddle_movement = 5
 paddle = pygame.Rect(paddle_x, paddle_y, paddle_width, paddle_height)
 
 # Set up the ball variables
+#건:(ball_angle 이 0일 경우에 대한 예외 처리를 추가함)
 ball_radius = 10
 ball_x = window_width // 2
 ball_y = window_height // 2
 ball_speed = 4
-ball_angle = random.uniform(-math.pi / 4, math.pi / 4)  # Random initial angle between 30 and 60 degrees
+ball_angle = 0
+while ball_angle == 0:
+    ball_angle = random.uniform(-math.pi / 4, math.pi / 4)  # Random initial angle between -45 and 45 degrees
 ball_dx = ball_speed * math.cos(ball_angle)
 ball_dy = -ball_speed * math.sin(ball_angle)
 ball = pygame.Rect(ball_x, ball_y, ball_radius * 2, ball_radius * 2)
@@ -53,11 +58,12 @@ for row in range(brick_rows):
         brick_y = row * (brick_height + brick_gap) + 50
         brick = pygame.Rect(brick_x, brick_y, brick_width, brick_height)
         bricks.append(brick)
-        if random.uniform(0, 1) < 0.2:
-            brick_colors.append(ORANGE)
-            orange_bricks.append((brick_x, brick_y))
-        else:
-            brick_colors.append(BLUE)
+        #아래 코드는 벽돌 색상을 무작위로 할당하는 부분입니다.
+        if random.uniform(0, 1) < 0.2:#random.uniform(0, 1) 함수를 사용하여 0과 1 사이에서 무작위로 생성된 숫자가 0.2보다 작으면 
+            brick_colors.append(ORANGE)#벽돌 색상을 ORANGE로 설정하고, 
+            orange_bricks.append((brick_x, brick_y))# 해당 벽돌의 위치를 orange_bricks 리스트에 추가합니다. 
+        else:# 그렇지 않으면 
+            brick_colors.append(BLUE)#벽돌 색상을 BLUE로 설정합니다.
 
 # Set up the game clock
 clock = pygame.time.Clock()
@@ -122,10 +128,10 @@ def break_nearby_bricks(x, y):
     for brick in bricks[:]:  # Use a copy of bricks list to iterate safely
         if brick.colliderect(pygame.Rect(x - brick_width, y - brick_height, brick_width * 3, brick_height * 3)):
             index = bricks.index(brick)
-            if brick_colors[index] == BLUE:
-                bricks.remove(brick)
-                brick_colors.pop(index)
-                break
+            # if brick_colors[index] == BLUE:
+            #     bricks.remove(brick)
+            #     brick_colors.pop(index)
+            #     break
             
 # Set up fonts
 score_font = pygame.font.Font(None, 36)
