@@ -5,7 +5,7 @@ import random
 from settings import *
 from level import Level
 from pygame.locals import *
-
+#안녕하세요
 class Game:
     def __init__(self, fullscreen=False):
         # general setup
