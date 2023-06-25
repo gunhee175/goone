@@ -3,4 +3,6 @@
 require package:
   `moderngl`
   `pygame`
-<br>run main.py
+<br>
+how to run:
+  run main.py
