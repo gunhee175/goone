@@ -1,6 +1,6 @@
 # goone
 
 require package:
-  moderngl
-  pygame
-run main.py
+  `moderngl`
+  `pygame`
+<br>run main.py
